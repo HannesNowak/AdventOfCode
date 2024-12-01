@@ -2,15 +2,24 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
 
 	utils "github.com/HannesNowak/AdventOfCode/utils"
 )
 
 func main() {
-	lines, err := utils.ReadLines("./input")
+	lines, err := utils.ReadLines(os.Stdin)
 	if err != nil {
 		fmt.Println(err)
 	}
+	var res int
+	startTime := time.Now()
 
-	fmt.Println(lines)
+
+
+
+
+	fmt.Println("Execution time:", time.Since(startTime))
+	fmt.Println(res)
 }

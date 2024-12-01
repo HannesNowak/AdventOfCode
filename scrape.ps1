@@ -29,6 +29,11 @@ if (-not (Test-Path ".\part1.go")) {
 	cp "..\part.template" ".\part2.go"
 }
 
+# Create Makefile
+if (-not (Test-Path ".\Makefile")) {
+	cp "..\Makefile.template" ".\Makefile"
+}
+
 # Fetch the assignment
 if (-not (Test-Path ".\assignment")) {
 	curl "$uri" -s | htmlq -p '.day-desc' > .\temp.html
