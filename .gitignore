@@ -1,0 +1,10 @@
+# Go
+go.sum
+
+# Environment variables
+.env
+
+# Advent of Code
+**/assignment*
+**/input*
+**/result*

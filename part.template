@@ -1,0 +1,16 @@
+package main
+
+import (
+	"fmt"
+
+	utils "github.com/HannesNowak/AdventOfCode/utils"
+)
+
+func main() {
+	lines, err := utils.ReadLines("./input")
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(lines)
+}
