@@ -2,15 +2,18 @@ package main
 
 import (
 	"fmt"
+	"os"
+	"time"
 
 	utils "github.com/HannesNowak/AdventOfCode/utils"
 )
 
 func main() {
-	lines, err := utils.ReadLines("./input")
+	lines, err := utils.ReadLines(os.Stdin)
 	if err != nil {
 		fmt.Println(err)
 	}
+	startTime := time.Now()
 
 	firstNums, lastNums := getNumLists(lines)
 
@@ -19,6 +22,7 @@ func main() {
 
 	dist := getDistance(firstNums, lastNums)
 
+	fmt.Println("Execution time:", time.Since(startTime))
 	fmt.Println(dist)
 }
 

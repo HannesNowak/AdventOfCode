@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	utils "github.com/HannesNowak/AdventOfCode/utils"
 )
 
 func main() {
-	lines, err := utils.ReadLines("./input")
+	lines, err := utils.ReadLines(os.Stdin)
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -25,22 +26,28 @@ func main() {
 	fmt.Println(dist)
 }
 
+func getNumLists(lines []string) ([]int, []int) {
+	var firstNums, lastNums []int
+	var firstNum, lastNum, idx int
+	for _, line := range lines {
+		firstNum, idx = utils.NextInt(line, 0, len(line))
+		lastNum, _ = utils.NextInt(line, idx, len(line))
+		firstNums = append(firstNums, firstNum)
+		lastNums = append(lastNums, lastNum)
+	}
+	return firstNums, lastNums
+}
+
 func getSimilarity(firstNums []int, lastNums []int) int {
-	var sum, startIdx int
+	var sum int
 	for _, firstNum := range firstNums {
 		cnt := 0
-	inner:
-		for idx, lastNum := range lastNums[startIdx:] {
+		for _, lastNum := range lastNums {
 			if firstNum == lastNum {
 				cnt++
-			} else if firstNum < lastNum {
-				startIdx = idx
-				break inner
 			}
 		}
 		sum += cnt * firstNum
 	}
 	return sum
 }
-
-// 18805872
