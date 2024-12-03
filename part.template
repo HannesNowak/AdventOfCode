@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"time"
@@ -9,10 +10,8 @@ import (
 )
 
 func main() {
-	lines, err := utils.ReadLines(os.Stdin)
-	if err != nil {
-		fmt.Println(err)
-	}
+	scanner := bufio.NewScanner(os.Stdin)
+	lines := utils.ReadLines(scanner)
 	var res int
 	startTime := time.Now()
 

@@ -1,24 +1,24 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
+	"slices"
 	"time"
 
 	utils "github.com/HannesNowak/AdventOfCode/utils"
 )
 
 func main() {
-	lines, err := utils.ReadLines(os.Stdin)
-	if err != nil {
-		fmt.Println(err)
-	}
+	scanner := bufio.NewScanner(os.Stdin)
+	lines := utils.ReadLines(scanner)
 	startTime := time.Now()
 
 	firstNums, lastNums := getNumLists(lines)
 
-	firstNums = utils.Sort(firstNums)
-	lastNums = utils.Sort(lastNums)
+	slices.Sort(firstNums)
+	slices.Sort(lastNums)
 
 	dist := getDistance(firstNums, lastNums)
 
@@ -28,12 +28,10 @@ func main() {
 
 func getNumLists(lines []string) ([]int, []int) {
 	var firstNums, lastNums []int
-	var firstNum, lastNum, idx int
 	for _, line := range lines {
-		firstNum, idx = utils.NextInt(line, 0, len(line))
-		lastNum, _ = utils.NextInt(line, idx, len(line))
-		firstNums = append(firstNums, firstNum)
-		lastNums = append(lastNums, lastNum)
+		nums := utils.AllInts(line)
+		firstNums = append(firstNums, nums[0])
+		lastNums = append(lastNums, nums[1])
 	}
 	return firstNums, lastNums
 }

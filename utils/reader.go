@@ -2,16 +2,21 @@ package utils
 
 import (
 	"bufio"
-	"os"
+	"regexp"
 )
 
-func ReadLines(file *os.File) ([]string, error) {
+func ReadLines(scanner *bufio.Scanner) []string {
 	var lines []string
-	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
+		if scanner.Text() == "" {
+			return lines
+		}
 		lines = append(lines, scanner.Text())
 	}
-	return lines, scanner.Err()
+	if err := scanner.Err(); err != nil {
+		panic(err)
+	}
+	return lines
 }
 
 func NextInt(line string, start int, amount int) (int, int) {
@@ -28,4 +33,28 @@ func NextInt(line string, start int, amount int) (int, int) {
 		}
 	}
 	return n, idx
+}
+
+func AllInts(line string) []int {
+	var ints []int
+	for idx := 0; idx < len(line); {
+		n, next := NextInt(line, idx, len(line)-idx)
+		if n > 0 {
+			ints = append(ints, n)
+		}
+		idx = next
+	}
+	return ints
+}
+
+func RegexIndex(line string, re string) [][]int {
+	regex := regexp.MustCompile(re)
+	matches := regex.FindAllStringSubmatchIndex(line, -1)
+	return matches
+}
+
+func RegexString(line string, re string) []string {
+	regex := regexp.MustCompile(re)
+	matches := regex.FindAllString(line, -1)
+	return matches
 }

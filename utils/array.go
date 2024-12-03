@@ -1,12 +1,8 @@
 package utils
 
-func Sort(arr []int) []int {
-	for i := 0; i < len(arr); i++ {
-		for j := 0; j < len(arr)-1; j++ {
-			if arr[j] > arr[j+1] {
-				arr[j], arr[j+1] = arr[j+1], arr[j]
-			}
-		}
-	}
-	return arr
+func Remove[T comparable](arr []T, idx int) []T {
+	reduced := make([]T, len(arr)-1)
+	copy(reduced, arr[:idx])
+	copy(reduced[idx:], arr[idx+1:])
+	return reduced
 }

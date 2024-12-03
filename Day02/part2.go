@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"time"
@@ -9,15 +10,13 @@ import (
 )
 
 func main() {
-	lines, err := utils.ReadLines(os.Stdin)
-	if err != nil {
-		fmt.Println(err)
-	}
+	scanner := bufio.NewScanner(os.Stdin)
+	lines := utils.ReadLines(scanner)
 	var res int
 	startTime := time.Now()
 
 	for _, line := range lines {
-		report := getLevels(line)
+		report := utils.AllInts(line)
 		if evalReport(report) {
 			fmt.Println(report, "is safe")
 			res++
@@ -26,16 +25,6 @@ func main() {
 
 	fmt.Println("Execution time:", time.Since(startTime))
 	fmt.Println(res)
-}
-
-func getLevels(line string) []int {
-	var levels []int
-	var idx, level int
-	for idx < len(line) {
-		level, idx = utils.NextInt(line, idx, len(line))
-		levels = append(levels, level)
-	}
-	return levels
 }
 
 func checkReport(report []int) bool {
@@ -70,9 +59,8 @@ func evalReport(report []int) bool {
 		return true
 	}
 	for idx := 0; idx < len(report); idx++ {
-		temp := make([]int, len(report)-1)
-		copy(temp, report[:idx])
-		copy(temp[idx:], report[idx+1:])
+		// TODO move to utils/array.go
+		temp := utils.Remove(report, idx)
 		fmt.Println(report, idx, "->", temp)
 		if checkReport(temp) {
 			return true
