@@ -19,6 +19,18 @@ func ReadLines(scanner *bufio.Scanner) []string {
 	return lines
 }
 
+func ExtractGrid(imput []string) [][]rune {
+	var grid [][]rune
+	for _, line := range imput {
+		var row []rune
+		for _, char := range line {
+			row = append(row, char)
+		}
+		grid = append(grid, row)
+	}
+	return grid
+}
+
 func NextInt(line string, start int, amount int) (int, int) {
 	var n, idx int
 	for idx = start; idx < start+amount; idx++ {
