@@ -26,18 +26,14 @@ func main() {
 
 	for _, update := range updates {
 		order := utils.AllInts(update)
-		if !swapUpdate(order, rules) {
-			continue
-		}
-		eval := evalUpdate(order, rules)
-		res += eval
+		res += swapUpdate(order, rules)
 	}
 
 	fmt.Println("Execution time:", time.Since(startTime))
 	fmt.Println(res)
 }
 
-func swapUpdate(update []int, rules map[int][]int) bool {
+func swapUpdate(update []int, rules map[int][]int) int {
 	reordered := false
 	for idx, page := range update {
 		for i := 0; i < idx; i++ {
@@ -49,16 +45,8 @@ func swapUpdate(update []int, rules map[int][]int) bool {
 			}
 		}
 	}
-	return reordered
-}
-
-func evalUpdate(update []int, rules map[int][]int) int {
-	for idx, page := range update {
-		for i := 0; i < idx; i++ {
-			if slices.Contains(rules[page], update[i]) {
-				return 0
-			}
-		}
+	if reordered {
+		return update[len(update)/2]
 	}
-	return update[len(update)/2]
+	return 0
 }
