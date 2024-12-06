@@ -31,6 +31,15 @@ func ExtractGrid(imput []string) [][]rune {
 	return grid
 }
 
+func PrintGrid(grid [][]rune) {
+	for _, row := range grid {
+		for _, cell := range row {
+			print(string(cell))
+		}
+		println()
+	}
+}
+
 func NextInt(line string, start int, amount int) (int, int) {
 	var n, idx int
 	for idx = start; idx < start+amount; idx++ {
