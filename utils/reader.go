@@ -31,6 +31,10 @@ func ExtractGrid(imput []string) [][]rune {
 	return grid
 }
 
+func OutOfGrid(grid [][]rune, x, y int) bool {
+	return y < 0 || y >= len(grid) || x < 0 || x >= len(grid[y])
+}
+
 func PrintGrid(grid [][]rune) {
 	for _, row := range grid {
 		for _, cell := range row {
