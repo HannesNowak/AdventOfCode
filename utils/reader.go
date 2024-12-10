@@ -31,7 +31,7 @@ func ExtractGrid(imput []string) [][]rune {
 	return grid
 }
 
-func OutOfGrid(grid [][]rune, x, y int) bool {
+func OutOfGrid[T comparable](grid [][]T, x, y int) bool {
 	return y < 0 || y >= len(grid) || x < 0 || x >= len(grid[y])
 }
 
