@@ -47,7 +47,8 @@ func PrintGrid(grid [][]rune) {
 func NextInt(line string, start int, amount int) (int, int) {
 	var n, idx int
 	for idx = start; idx < start+amount; idx++ {
-		if idx >= len(line) {
+		if idx >= len(line) || line[idx] == ' ' {
+			idx++
 			break
 		}
 		r := rune(line[idx])
@@ -64,9 +65,7 @@ func AllInts(line string) []int {
 	var ints []int
 	for idx := 0; idx < len(line); {
 		n, next := NextInt(line, idx, len(line)-idx)
-		if n > 0 {
-			ints = append(ints, n)
-		}
+		ints = append(ints, n)
 		idx = next
 	}
 	return ints
