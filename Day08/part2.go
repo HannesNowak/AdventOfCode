@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"slices"
 	"time"
 
 	utils "github.com/HannesNowak/AdventOfCode/utils"
@@ -40,14 +39,14 @@ func main() {
 				if i >= j || sat1 == sat2 {
 					continue
 				}
-				antinodes[freq] = appendUnique(antinodes[freq], satsAntinode(grid, sats, sat1, sat2)...)
+				antinodes[freq] = utils.AppendUnique(antinodes[freq], satsAntinode(grid, sats, sat1, sat2)...)
 			}
 		}
 	}
 
 	uniqueAntinodes := []Loc{}
 	for _, antis := range antinodes {
-		uniqueAntinodes = appendUnique(uniqueAntinodes, antis...)
+		uniqueAntinodes = utils.AppendUnique(uniqueAntinodes, antis...)
 	}
 
 	res = len(uniqueAntinodes)
@@ -65,7 +64,7 @@ func satsAntinode(grid [][]rune, sats []Loc, sat1 Loc, sat2 Loc) []Loc {
 
 		diff1 := Loc{sat1.x + diff.x*i, sat1.y + diff.y*i}
 		if !utils.OutOfGrid(grid, diff1.x, diff1.y) {
-			newAntinodes := appendUnique(sats, diff1)
+			newAntinodes := utils.AppendUnique(sats, diff1)
 			if len(newAntinodes) > len(sats) {
 				sats = newAntinodes
 				subcount++
@@ -74,7 +73,7 @@ func satsAntinode(grid [][]rune, sats []Loc, sat1 Loc, sat2 Loc) []Loc {
 
 		diff2 := Loc{sat2.x - diff.x*i, sat2.y - diff.y*i}
 		if !utils.OutOfGrid(grid, diff2.x, diff2.y) {
-			newAntinodes := appendUnique(sats, diff2)
+			newAntinodes := utils.AppendUnique(sats, diff2)
 			if len(newAntinodes) > len(sats) {
 				sats = newAntinodes
 				subcount++
@@ -87,19 +86,8 @@ func satsAntinode(grid [][]rune, sats []Loc, sat1 Loc, sat2 Loc) []Loc {
 	}
 
 	if addSats {
-		sats = appendUnique(sats, sat1, sat2)
+		sats = utils.AppendUnique(sats, sat1, sat2)
 	}
 
 	return sats
-}
-
-func appendUnique[T comparable](slice []T, elem ...T) []T {
-	res := slice
-	for _, el := range elem {
-		if slices.Contains(res, el) {
-			continue
-		}
-		res = append(res, el)
-	}
-	return res
 }
