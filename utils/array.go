@@ -19,3 +19,13 @@ func AppendUnique[T comparable](slice []T, elem ...T) []T {
 	}
 	return res
 }
+
+func Filter[T any](arr []T, f func(T) bool) []T {
+	var res []T
+	for _, el := range arr {
+		if f(el) {
+			res = append(res, el)
+		}
+	}
+	return res
+}
