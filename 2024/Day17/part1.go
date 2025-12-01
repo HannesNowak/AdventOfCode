@@ -48,6 +48,7 @@ func main() {
 			bst(operand)
 		case 3:
 			if idx := jnz(operand); idx != -1 {
+				fmt.Println(regs, output)
 				i = idx - 2
 			}
 		case 4:

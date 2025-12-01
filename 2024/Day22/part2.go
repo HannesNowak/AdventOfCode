@@ -71,5 +71,3 @@ func eval(secret int) int {
 	secret = prune(mix(secret*2048, secret))
 	return secret
 }
-
-// 1799 too low

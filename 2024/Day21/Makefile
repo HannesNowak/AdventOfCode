@@ -7,7 +7,7 @@ part2:
 .PHONY: run1 run2 clean
 
 run1: part1
-	./part1 <input
+	./part1 <input1
 
 run2: part2
 	./part2 <input

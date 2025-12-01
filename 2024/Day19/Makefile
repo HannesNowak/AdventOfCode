@@ -10,7 +10,7 @@ run1: part1
 	./part1 <input
 
 run2: part2
-	./part2 <input
+	./part2 <input1
 
 clean:
 	rm -f part1 part2

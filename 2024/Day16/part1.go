@@ -127,7 +127,7 @@ func main() {
 			moves++
 		}
 
-		utils.PrintGrid(grid)
+		// utils.PrintGrid(grid)
 		fmt.Println("Turns:", turns, "Moves:", moves)
 	}
 
@@ -213,4 +213,4 @@ func removeLoc(slice []Node, loc Node) []Node {
 	return slice
 }
 
-// TODO 74428 too high
+// TODO 74428 too high -> 72428
